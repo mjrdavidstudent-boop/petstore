@@ -36,6 +36,34 @@ The backend uses:
 - `SPRING_DATASOURCE_USERNAME=petstore`
 - `SPRING_DATASOURCE_PASSWORD=petstore`
 
+## Deploy To Render With Supabase
+
+Deploy the backend and frontend as separate Render services.
+
+### Backend
+
+1. Create a Supabase project and copy the PostgreSQL connection details.
+2. In Render, create a web service from the `backend/` folder using the Dockerfile.
+3. Set these environment variables in Render:
+	- `SPRING_DATASOURCE_URL` to the Supabase JDBC URL, for example `jdbc:postgresql://<host>:5432/postgres?sslmode=require`
+	- `SPRING_DATASOURCE_USERNAME` to the Supabase database user
+	- `SPRING_DATASOURCE_PASSWORD` to the Supabase database password
+	- `CORS_ALLOWED_ORIGINS` to your frontend URL on Render
+	- `SERVER_PORT` to `8080`
+4. Deploy the service and note the backend URL.
+
+### Frontend
+
+1. Create a static site in Render from the `frontend/` folder.
+2. Set `VITE_API_BASE_URL` to the deployed backend URL, for example `https://petstore-backend.onrender.com`.
+3. Deploy the site.
+
+### Important Notes
+
+- Do not use the Render database block for this setup. Supabase is the database provider.
+- The backend should point only to Supabase for persistence.
+- Keep the frontend and backend as separate Render services.
+
 ### 3. Start the frontend
 
 ```bash
