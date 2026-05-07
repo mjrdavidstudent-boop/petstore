@@ -1,0 +1,45 @@
+openapi: 3.0.3
+info:
+  title: Petstore API
+  version: 1.0.0
+paths:
+  /api/pets:
+    get:
+      summary: List pets
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+        - in: query
+          name: species
+          schema:
+            type: string
+        - in: query
+          name: available
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Pet list
+    post:
+      summary: Create a pet
+      responses:
+        '201':
+          description: Created
+  /api/pets/{id}:
+    get:
+      summary: Get a pet
+      responses:
+        '200':
+          description: Pet details
+    put:
+      summary: Update a pet
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete a pet
+      responses:
+        '204':
+          description: Deleted
